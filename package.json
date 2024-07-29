@@ -1,0 +1,13 @@
+{
+  "name": "sidexporter",
+  "version": "1.0.0",
+  "description": "Log in to 8a.nu website and export connect.sid cookie",
+  "main": "main.mjs",
+  "scripts": {},
+  "author": "Antoni Mleczko <dev@amleczko.pl>",
+  "license": "ISC",
+  "dependencies": {
+    "audic": "^3.0.2",
+    "puppeteer": "^22.9.0"
+  }
+}
