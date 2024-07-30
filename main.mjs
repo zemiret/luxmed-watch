@@ -23,7 +23,8 @@ function alarm() {
 	console.log("GOT IT!");
 	exec('mpv alarm.wav', (err, stdout, stderr) => {
 	  if (err) {
-		console.log("GOT IT, BUT COULD NOT PLAY THE SOUND!");
+		let date = new Date();
+		console.log(date.toTimeString() + ": GOT IT, BUT COULD NOT PLAY THE SOUND!");
 		return;
 	  }
 	});
@@ -89,12 +90,17 @@ function getRandomInt(min, max) {
 		]);
 
 		const termsCountSelector = '.terms-count > strong';
-		await page.waitForSelector(termsCountSelector, { timeout: 10000 });
-		const count = await page.$eval(termsCountSelector, el => el.innerText);
-		console.log(`count: `, count);
-		if (count > 0) {
-			alarm();
-			break;
+		try {
+			await page.waitForSelector(termsCountSelector, { timeout: 10000 });
+			const count = await page.$eval(termsCountSelector, el => el.innerText);
+			console.log(`count: `, count);
+			if (count > 0) {
+				alarm();
+				break;
+			}
+		} catch(e) {
+			let date = new Date();
+			console.log(date.toTimeString() + ": no luck");
 		}
 
 		// sleep for 45-90s
